@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "320158388784",
+    "firebase_url": "https://gwucapstone-a243d.firebaseio.com",
+    "project_id": "gwucapstone-a243d",
+    "storage_bucket": "gwucapstone-a243d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320158388784:android:4a22f474deba9cad",
+        "android_client_info": {
+          "package_name": "localeconnect.me.localeconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320158388784-d25t54a7nf6uufgp8gdq25rg46p65qlt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzuactbqOlW6Wg8vUCYo1SACGAM1B4aTg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
