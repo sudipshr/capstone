@@ -12,8 +12,8 @@ public class Event {
 	private String city;
 	private String zip;
 	private String country;
-	private long longtude;
-	private long lattiude;
+	private double longtude;
+	private double lattiude;
 	private Date eventTime;
 	private Date eventCheckInTime;
 	private Date eventCheckoutTime;
@@ -91,26 +91,26 @@ public class Event {
 	 * @return the longtude
 	 */
 
-	public long getLongtude() {
+	public double getLongtude() {
 		return longtude;
 	}
 	/**
 	 * @param longtude the longtude to set
 	 */
-	public void setLongtude(long longtude) {
+	public void setLongtude(double longtude) {
 		this.longtude = longtude;
 	}
 	/**
 	 * @return the lattiude
 	 */
 
-	public long getLattiude() {
+	public double getLattiude() {
 		return lattiude;
 	}
 	/**
 	 * @param lattiude the lattiude to set
 	 */
-	public void setLattiude(long lattiude) {
+	public void setLattiude(double lattiude) {
 		this.lattiude = lattiude;
 	}
 	/**
@@ -215,8 +215,8 @@ public class Event {
 		result = prime * result + ((eventTime == null) ? 0 : eventTime.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((initiatingUserId == null) ? 0 : initiatingUserId.hashCode());
-		result = prime * result + (int) (lattiude ^ (lattiude >>> 32));
-		result = prime * result + (int) (longtude ^ (longtude >>> 32));
+		result = prime * result + (int) (lattiude );
+		result = prime * result + (int) (longtude );
 		result = prime * result + (verReqIndicator ? 1231 : 1237);
 		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
 		return result;

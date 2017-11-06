@@ -37,7 +37,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import localeconnect.me.localeconnect.event.CreateEventActivity;
+import localeconnect.me.localeconnect.event.EventListActivity;
+import localeconnect.me.localeconnect.service.Service;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -45,6 +50,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -127,6 +133,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin(true);
+            }
+        });
+
+        Button mEventListButton = (Button) findViewById(R.id.eventList_button);
+        mEventListButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateEvents(view);
+            }
+        });
+
+        Button mEventsButton = (Button) findViewById(R.id.createEvent_button);
+        mEventsButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToCreateEvent(view);
             }
         });
 
@@ -234,11 +256,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password, userName, false);
+            mAuthTask = new UserLoginTask(email, password, userName, isRegister, false);
             mAuthTask.execute((Void) null);
+            //navigateToHomeScreen(mLoginFormView);
         }
 
-        navigateToHomeScreen(mLoginFormView);
+        navigateEvents(mLoginFormView);
+
+
     }
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -350,47 +375,53 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mPassword;
         private final String mUserName;
         private boolean mStubMode;
+        private boolean mIsRegister;
 
-        UserLoginTask(String email, String password, String userName, boolean stubMode) {
+        UserLoginTask(String email, String password, String userName,
+                      boolean isRegister, boolean stubMode) {
             mEmail = email;
             mPassword = password;
             mUserName = userName;
             mStubMode = stubMode;
+            mIsRegister = isRegister;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
+
 
             if (!mStubMode){
                 try {
-                    String url = "http://rest-service.guides.spring.io/greeting";
-                    url = "http://localhost:9000/eventserv";
-
+                    Service service = new Service();
                     User user = new User();
-                    user.setDeviceId("sdfdsdfsfd");
-                    user.setUserName(String.valueOf(System.currentTimeMillis()));
-                    RestTemplate restTemplate = new RestTemplate();
-                    HttpEntity<User> request = new HttpEntity<>(user);
-                    ResponseEntity<User> entity = restTemplate.exchange(url, HttpMethod.POST,
-                            request, User.class);
+                    user.setUserName(this.mUserName);
+                    user.setPassword(this.mPassword);
+                    user.setJoinDate(new Date());
+                    user.setEmail(this.mEmail);
+                    if (this.mIsRegister){
+                        service.register(user);
+                    }
+                    else {
+                        service.login(user);
+                    }
 
-                    //restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                    //User user = restTemplate.getForObject(url, User.class);
-                    //restTemplate.exchange()
+
                     Log.i("return msg:",user.toString());
                 } catch (Exception e) {
                     Log.e("MainActivity", e.getMessage(), e);
                 }
             }
             else {
+
+                try {
+                    // Simulate network access.
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    return false;
+                }
+
                 for (String credential : DUMMY_CREDENTIALS) {
                     String[] pieces = credential.split(":");
                     if (pieces[0].equals(mEmail)) {
@@ -425,8 +456,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    public void navigateToHomeScreen(View view) {
-        Intent intent = new Intent(this, HomeScreen.class);
+    public void navigateToCreateEvent(View view) {
+        //Intent intent = new Intent(this, HomeScreen.class);
+        Intent intent = new Intent(this, CreateEventActivity.class);
+
+        intent.putExtra("test", "Home Screen.....Under Construction");
+        startActivity(intent);
+    }
+
+    public void navigateEvents(View view) {
+        //Intent intent = new Intent(this, HomeScreen.class);
+        Intent intent = new Intent(this, EventListActivity.class);
 
         intent.putExtra("test", "Home Screen.....Under Construction");
         startActivity(intent);

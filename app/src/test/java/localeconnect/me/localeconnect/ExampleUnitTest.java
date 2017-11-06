@@ -12,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 
+import localeconnect.me.localeconnect.service.Service;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -41,5 +43,24 @@ public class ExampleUnitTest {
         HttpEntity<Event> request = new HttpEntity<>(user);
         ResponseEntity<Event> entity = restTemplate.exchange(url, HttpMethod.POST,
                 request, Event.class);
+    }
+
+    @Test
+    public void testLogin() throws Exception {
+
+
+        Service service = new Service();
+        User user = new User();
+        user.setUserName(String.valueOf(System.currentTimeMillis()));
+        user.setUserName(String.valueOf(System.currentTimeMillis()));
+        user.setJoinDate(new Date());
+        user.setEmail("sudip@yhooo.com");
+        if (true){
+            service.register(user);
+        }
+        else {
+            service.login(user);
+        }
+
     }
 }
