@@ -3,10 +3,13 @@ package localeconnect.me.localeconnect;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Application;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -124,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin(false);
+                attemptLogin(view, false);
             }
         });
 
@@ -132,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin(true);
+                attemptLogin(view, true);
             }
         });
 
@@ -205,7 +208,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin(boolean isRegister) {
+    private void attemptLogin(View view, boolean isRegister) {
         if (mAuthTask != null) {
             return;
         }
@@ -256,12 +259,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password, userName, isRegister, false);
+            mAuthTask = new UserLoginTask(view, email, password, userName, isRegister, false);
             mAuthTask.execute((Void) null);
             //navigateToHomeScreen(mLoginFormView);
         }
 
-        navigateEvents(mLoginFormView);
+        //navigateEvents(mLoginFormView);
 
 
     }
@@ -376,14 +379,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mUserName;
         private boolean mStubMode;
         private boolean mIsRegister;
+        private View mView;
 
-        UserLoginTask(String email, String password, String userName,
+        UserLoginTask(View view, String email, String password, String userName,
                       boolean isRegister, boolean stubMode) {
             mEmail = email;
             mPassword = password;
             mUserName = userName;
             mStubMode = stubMode;
             mIsRegister = isRegister;
+            mView = view;
         }
 
         @Override
@@ -393,6 +398,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
             if (!mStubMode){
+                User userObj = null;
                 try {
                     Service service = new Service();
                     User user = new User();
@@ -401,14 +407,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     user.setJoinDate(new Date());
                     user.setEmail(this.mEmail);
                     if (this.mIsRegister){
-                        service.register(user);
+                        userObj = service.register(user);
                     }
                     else {
-                        service.login(user);
+                        userObj = service.login(user);
                     }
 
-
                     Log.i("return msg:",user.toString());
+
+                    /*SharedPreferences preferences = getApplicationContext().getSharedPreferences("auth", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor edit = preferences.edit();
+                    edit.putString("userId", userObj != null?userObj.getId():null);
+                    edit.commit();*/
+
+                    LocaleApp appContext = (LocaleApp) getApplicationContext();
+                    appContext.setUser(userObj);
+                    return (userObj != null && userObj.getId() != null);
+
+
+
                 } catch (Exception e) {
                     Log.e("MainActivity", e.getMessage(), e);
                 }
@@ -443,9 +460,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 finish();
+
+
+                navigateToCreateEvent(this.mView);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
+
             }
         }
 
@@ -471,5 +492,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         intent.putExtra("test", "Home Screen.....Under Construction");
         startActivity(intent);
     }
+
+
 }
 

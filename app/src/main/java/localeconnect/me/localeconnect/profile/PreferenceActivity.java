@@ -1,11 +1,12 @@
-package localeconnect.me.localeconnect.event;
+package localeconnect.me.localeconnect.profile;
 
-import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,35 +20,51 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import localeconnect.me.localeconnect.Event;
 import localeconnect.me.localeconnect.LocaleApp;
+import localeconnect.me.localeconnect.Preference;
 import localeconnect.me.localeconnect.R;
 import localeconnect.me.localeconnect.User;
-import localeconnect.me.localeconnect.profile.PreferenceActivity;
+import localeconnect.me.localeconnect.event.CreateEventActivity;
+import localeconnect.me.localeconnect.event.EventListActivity;
 import localeconnect.me.localeconnect.service.Service;
 
-public class EventListActivity extends AppCompatActivity {
+public class PreferenceActivity extends AppCompatActivity {
 
     private ArrayAdapter listAdapter;
-    AsyncTask<Void, Void, List<Event>> execute;
+    AsyncTask<Void, Void, List<Preference>> execute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_list);
+        setContentView(R.layout.activity_preference);
+
         populateListView();
 
         registerOnClick();
+    }
+
+    private void registerOnClick(){
+
+        ListView list = (ListView) findViewById(R.id.myPreferenceListView);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView textView = (TextView) view;
+                String message = "You clicked "+ position + " clicked "+
+                        textView.getText().toString();
+                Toast.makeText(PreferenceActivity.this, message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void populateListView(){
 
 
 
-        ListView listView = (ListView) findViewById(R.id.eventListView);
+        ListView listView = (ListView) findViewById(R.id.myPreferenceListView);
 
 
         // Create and populate a List of planet names.
@@ -57,26 +74,17 @@ public class EventListActivity extends AppCompatActivity {
         planetList.addAll( Arrays.asList(planets) );
 
         // Create ArrayAdapter using the planet list.
-        listAdapter = new ArrayAdapter<String>(this, R.layout.activity_event_list_row, planetList);
+        listAdapter = new ArrayAdapter<String>(this, R.layout.activity_my_preference_list_row, planetList);
 
 
-
-        // Add more planets. If you passed a String[] instead of a List<String>
-        // into the ArrayAdapter constructor, you must not add more items.
-        // Otherwise an exception will occur.
-        listAdapter.add( "Ceres" );
-        listAdapter.add( "Pluto" );
-        listAdapter.add( "Haumea" );
-        listAdapter.add( "Makemake" );
-        listAdapter.add( "Eris" );
 
         // Set the ArrayAdapter as the ListView's adapter.
         listView.setAdapter( listAdapter );
 
 
-        EventListTask eventListTask = new EventListTask(null, new Service(), false);
+        PreferenceListTask pListTask = new PreferenceListTask(null, new Service(), false);
         execute =
-                eventListTask.execute();
+                pListTask.execute();
 
 
 
@@ -84,67 +92,67 @@ public class EventListActivity extends AppCompatActivity {
 
     }
 
+    private class PreferenceListTask extends AsyncTask<Void, Void, List<Preference>> {
 
-    private class EventListTask extends AsyncTask<Void, Void, List<Event>> {
-
-        private final Event mEvent;
+        private final Preference mPreference;
         private boolean mStubMode;
         private Service mSservice;
 
 
-        EventListTask(Event event, Service service, boolean stubMode) {
-            mEvent = event;
+        PreferenceListTask(Preference preference, Service service, boolean stubMode) {
+            mPreference = preference;
             mStubMode = stubMode;
             mSservice = service;
         }
 
         @Override
-        protected List<Event> doInBackground(Void... params) {
+        protected List<Preference> doInBackground(Void... params) {
 
-            List<Event> evt = null;
+            List<Preference> p = null;
             if (!mStubMode){
                 try {
 
                     LocaleApp appContext = (LocaleApp) getApplicationContext();
                     User user = appContext.getUser();
-                    Log.i("ERRORRRR",user != null ? user.toString():"USER CANT B RETRIEVED");
-                    evt = mSservice.getEvents();
+
+                    if (mPreference == null)
+                        p = mSservice.getPreferences();
+                    else {
+                        mPreference.setUserId(user.getId());
+                        p = mSservice.createPreference(mPreference);
+                    }
 
 
-                    Log.i("return msg:", evt != null?evt.toString():"no events");
+                   Log.i("return msg:", p != null?p.toString():"no preferences");
                 } catch (Exception e) {
-                    Log.e("CreateEventsActivity", e.getMessage(), e);
+                    Log.e("PreferenceListActivity", e.getMessage(), e);
                 }
             }
             else {
 
-                Event dummyEvent = new Event();
-                dummyEvent.setId("AAAAAAAAAAAAAAAAAAAAAAAAA");
-                dummyEvent.setAcceptingUserId("ramos");
-                dummyEvent.setPrefId("hangout");
-                evt = new ArrayList<>();
-                evt.add(dummyEvent);
-                evt.add(dummyEvent);
-                evt.add(dummyEvent);
+                Preference dummyPref = new Preference();
+                p = new ArrayList<>();
+                p.add(dummyPref);
+                p.add(dummyPref);
+                p.add(dummyPref);
 
 
             }
-            return evt;
+            return p;
         }
 
         @Override
-        protected void onPostExecute(final List<Event> events) {
+        protected void onPostExecute(final List<Preference> p) {
 
             listAdapter.clear();
 
 
-            if (events != null) {
+            if (p != null) {
 
                 //listAdapter.addAll(events);
 
-                for (Event evt: events){
-                    listAdapter.add(evt.getInitiatingUserId()+" is looking to meet for "+ evt.getPrefId()
-                    + " near "+evt.getAddress()+", "+evt.getCity());
+                for (Preference evt: p){
+                    listAdapter.add(evt);
 
                 }
 
@@ -159,18 +167,19 @@ public class EventListActivity extends AppCompatActivity {
         }
     }
 
-    private void registerOnClick(){
+    private void addPreference(){
+        String s = "some new preference  "+ System.currentTimeMillis();
 
-        ListView list = (ListView) findViewById(R.id.eventListView);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = (TextView) view;
-                String message = "You clicked "+ position + " clicked "+
-                        textView.getText().toString();
-                Toast.makeText(EventListActivity.this, message, Toast.LENGTH_LONG).show();
-            }
-        });
+        Preference p = new Preference();
+        TextView pTextView = (TextView) findViewById(R.id.lc_myPreferenceTextView);
+
+        String intent = pTextView.getText().toString();
+        p.setType(intent);
+
+        PreferenceListTask pListTask = new PreferenceListTask(p, new Service(), false);
+        execute =
+                pListTask.execute();
+
     }
 
     @Override
@@ -207,4 +216,6 @@ public class EventListActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }

@@ -4,6 +4,8 @@
     <!-- Strings related to login -->
     <string name="prompt_userName">User Name</string>
     <string name="prompt_email">Email (Required for Registration)</string>
+    <string name="prompt_eventPreference">Looking to</string>
+    <string name="prompt_eventHint">Hint: coffee with female</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Login</string>
@@ -109,10 +111,18 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="title_activity_create_event">CreateEventActivity</string>
+    <string name="title_activity_create_event">Locale Connect: Create Event</string>
+    <string name="title_activity_list_event">Locale Connect: Event List</string>
     <string name="lc_event_preference">Connect Preference</string>
     <string name="lc_post_event">Post Connect Preference</string>
+    <string name="lc_add_preference">Add Preference</string>
     <string name="lc_event_preference_desc">Optional message</string>
     <string name="lc_eventList_button">Event List</string>
     <string name="lc_createEvent_button">Create Event</string>
+    <string name="title_activity_swipe_view">SwipeViewActivity</string>
+    <string name="title_activity_preference">Locale Connect: My Preference</string>
+    <string name="menu_create_event">Create Event</string>
+    <string name="menu_event_list">Event List</string>
+    <string name="menu_preference">Preference</string>
+    <string name="menu_logout">Logout</string>
 </resources>

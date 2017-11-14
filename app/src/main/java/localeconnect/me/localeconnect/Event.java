@@ -3,23 +3,21 @@ package localeconnect.me.localeconnect;
 import java.util.Date;
 
 
-
-
 public class Event {
-	
+
 	private String id;
 	private String address;
 	private String city;
 	private String zip;
 	private String country;
-	private double longtude;
-	private double lattiude;
+	private double longitude;
+	private double latitude;
 	private Date eventTime;
 	private Date eventCheckInTime;
 	private Date eventCheckoutTime;
 	private boolean verReqIndicator;
 	private String prefId;
-	
+
 	private String initiatingUserId;
 	private String acceptingUserId;
 	/**
@@ -91,27 +89,27 @@ public class Event {
 	 * @return the longtude
 	 */
 
-	public double getLongtude() {
-		return longtude;
+	public double getLongitude() {
+		return longitude;
 	}
 	/**
-	 * @param longtude the longtude to set
+	 * @param longtude the longitude to set
 	 */
-	public void setLongtude(double longtude) {
-		this.longtude = longtude;
+	public void setLongitude(double longtude) {
+		this.longitude = longtude;
 	}
 	/**
-	 * @return the lattiude
+	 * @return the latitude
 	 */
 
-	public double getLattiude() {
-		return lattiude;
+	public double getLatitude() {
+		return latitude;
 	}
 	/**
-	 * @param lattiude the lattiude to set
+	 * @param lattiude the latitude to set
 	 */
-	public void setLattiude(double lattiude) {
-		this.lattiude = lattiude;
+	public void setLatitude(double lattiude) {
+		this.latitude = lattiude;
 	}
 	/**
 	 * @return the eventTime
@@ -191,7 +189,7 @@ public class Event {
 	public void setAcceptingUserId(String acceptingUserId) {
 		this.acceptingUserId = acceptingUserId;
 	}
-	
+
 
 	public String getPrefId() {
 		return prefId;
@@ -215,8 +213,8 @@ public class Event {
 		result = prime * result + ((eventTime == null) ? 0 : eventTime.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((initiatingUserId == null) ? 0 : initiatingUserId.hashCode());
-		result = prime * result + (int) (lattiude );
-		result = prime * result + (int) (longtude );
+		result = prime * result + (int) (latitude);
+		result = prime * result + (int) (longitude);
 		result = prime * result + (verReqIndicator ? 1231 : 1237);
 		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
 		return result;
@@ -278,9 +276,9 @@ public class Event {
 				return false;
 		} else if (!initiatingUserId.equals(other.initiatingUserId))
 			return false;
-		if (lattiude != other.lattiude)
+		if (latitude != other.latitude)
 			return false;
-		if (longtude != other.longtude)
+		if (longitude != other.longitude)
 			return false;
 		if (verReqIndicator != other.verReqIndicator)
 			return false;
@@ -297,18 +295,11 @@ public class Event {
 	@Override
 	public String toString() {
 		return "Event [id=" + id + ", address=" + address + ", city=" + city + ", zip=" + zip + ", country=" + country
-				+ ", longtude=" + longtude + ", lattiude=" + lattiude + ", eventTime=" + eventTime
+				+ ", longitude=" + longitude + ", latitude=" + latitude + ", eventTime=" + eventTime
 				+ ", eventCheckInTime=" + eventCheckInTime + ", eventCheckoutTime=" + eventCheckoutTime
 				+ ", verReqIndicator=" + verReqIndicator + ", initiatingUserId=" + initiatingUserId
 				+ ", acceptingUserId=" + acceptingUserId + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 }

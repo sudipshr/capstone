@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <item
+        android:id="@+id/createEventMenuItem"
+        android:orderInCategory="100"
+        android:title="@string/menu_create_event"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/eventListMenuItem"
+        android:orderInCategory="100"
+        android:title="@string/menu_event_list"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/myPreferenceMenuItem"
+        android:orderInCategory="100"
+        android:title="@string/menu_preference"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/logoutMenuItem"
+        android:orderInCategory="100"
+        android:title="@string/menu_logout"
+        app:showAsAction="never" />
+</menu>

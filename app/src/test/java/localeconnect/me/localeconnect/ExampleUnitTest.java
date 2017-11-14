@@ -1,5 +1,6 @@
 package localeconnect.me.localeconnect;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -61,6 +62,26 @@ public class ExampleUnitTest {
         else {
             service.login(user);
         }
+
+    }
+
+    @Test
+    public void testLoginRegistration() throws Exception {
+
+
+        Service service = new Service();
+        User user = new User();
+        user.setUserName(String.valueOf(System.currentTimeMillis()));
+        user.setPassword(String.valueOf(System.currentTimeMillis()));
+        user.setJoinDate(new Date());
+        user.setEmail("sudip@yhooo.com");
+        user  = service.register(user);
+
+        Assert.assertNotNull(user);
+        Assert.assertNotNull(user.getId());
+
+        User userA = service.login(user);
+        Assert.assertNotNull(userA.getId());
 
     }
 }

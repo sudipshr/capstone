@@ -9,8 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="localeconnect.me.localeconnect.event.CreateEventActivity">
-
+    tools:context="localeconnect.me.localeconnect.profile.PreferenceActivity"
+    tools:showIn="@layout/activity_preference">
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/ad_view"
@@ -21,38 +21,33 @@
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
-
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
         <AutoCompleteTextView
-            android:id="@+id/lc_preferenceTextView"
+            android:id="@+id/lc_myPreferenceTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_eventHint"
             android:inputType="text"
             android:maxLines="1"
 
-             />
+            />
 
     </android.support.design.widget.TextInputLayout>
-
     <Button
-        android:id="@+id/post_event_button"
+        android:id="@+id/add_my_preference_button"
         style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/lc_post_event"
+        android:text="@string/lc_add_preference"
         android:textStyle="bold" />
-
-    <CheckBox
-        android:id="@+id/postEventStubView"
+    <ListView
+        android:id="@+id/myPreferenceListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Stub Mode" />
-
+        android:layout_height="match_parent"></ListView>
 
 </LinearLayout>
