@@ -68,7 +68,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="localeconnect.me.localeconnect.LoginActivity" />
         </activity>
-
+        <activity
+            android:name=".profile.IDScanActivity"
+            android:label="@string/title_activity_preference"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="localeconnect.me.localeconnect.LoginActivity" />
+        </activity>
 
     </application>
 

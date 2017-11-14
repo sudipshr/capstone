@@ -105,9 +105,9 @@ public class Service {
 
     }
 
-    public List<Preference> getPreferences() {
+    public List<Preference> getPreferences(String userId) {
 
-        ResponseEntity<Preference[]> responseEntity = ServiceUtil.getRestTemplate().getForEntity(USERSERV_URI+ "/preferences", Preference[].class);
+        ResponseEntity<Preference[]> responseEntity = ServiceUtil.getRestTemplate().getForEntity(USERSERV_URI+ "/preferences?userId="+userId, Preference[].class);
         Preference[] objects = responseEntity.getBody();
 
         return Arrays.asList(objects);

@@ -31,13 +31,14 @@ import java.util.Locale;
 
 import localeconnect.me.localeconnect.Event;
 import localeconnect.me.localeconnect.LocaleApp;
+import localeconnect.me.localeconnect.LocaleConnectBaseActivity;
 import localeconnect.me.localeconnect.Preference;
 import localeconnect.me.localeconnect.R;
 import localeconnect.me.localeconnect.User;
 import localeconnect.me.localeconnect.profile.PreferenceActivity;
 import localeconnect.me.localeconnect.service.Service;
 
-public class CreateEventActivity extends AppCompatActivity implements LocationListener {
+public class CreateEventActivity extends LocaleConnectBaseActivity implements LocationListener {
 
     private double longitute;
     private double lattitude;
@@ -49,6 +50,8 @@ public class CreateEventActivity extends AppCompatActivity implements LocationLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+
+
 
 
         Button mCreateEventButton = (Button) findViewById(R.id.post_event_button);

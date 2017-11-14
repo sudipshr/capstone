@@ -12,13 +12,13 @@
     tools:context="localeconnect.me.localeconnect.event.EventListActivity">
 
     <com.google.android.gms.ads.AdView
-        android:id="@+id/ad_view"
+        android:id="@+id/ad_view_event_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+        ads:adUnitId="ca-app-pub-2018232626764954/1047968035" />
 
     <ListView
         android:id="@+id/eventListView"

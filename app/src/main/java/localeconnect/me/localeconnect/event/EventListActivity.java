@@ -24,12 +24,13 @@ import java.util.List;
 
 import localeconnect.me.localeconnect.Event;
 import localeconnect.me.localeconnect.LocaleApp;
+import localeconnect.me.localeconnect.LocaleConnectBaseActivity;
 import localeconnect.me.localeconnect.R;
 import localeconnect.me.localeconnect.User;
 import localeconnect.me.localeconnect.profile.PreferenceActivity;
 import localeconnect.me.localeconnect.service.Service;
 
-public class EventListActivity extends AppCompatActivity {
+public class EventListActivity extends LocaleConnectBaseActivity {
 
     private ArrayAdapter listAdapter;
     AsyncTask<Void, Void, List<Event>> execute;
@@ -39,6 +40,7 @@ public class EventListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_list);
         populateListView();
+
 
         registerOnClick();
     }
@@ -173,38 +175,5 @@ public class EventListActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.app_menu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        Intent intent;
-        switch (item.getItemId()) {
-            case R.id.createEventMenuItem:
-                intent = new Intent(this, CreateEventActivity.class);
-
-                intent.putExtra("test", "Home Screen.....Under Construction");
-                startActivity(intent);
-                return true;
-            case R.id.eventListMenuItem:
-                intent = new Intent(this, EventListActivity.class);
-
-                intent.putExtra("test", "Home Screen.....Under Construction");
-                startActivity(intent);
-                return true;
-            case R.id.myPreferenceMenuItem:
-                intent = new Intent(this, PreferenceActivity.class);
-
-                intent.putExtra("test", "Home Screen.....Under Construction");
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }

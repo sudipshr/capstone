@@ -3,10 +3,7 @@ package localeconnect.me.localeconnect.profile;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import localeconnect.me.localeconnect.Event;
 import localeconnect.me.localeconnect.LocaleApp;
 import localeconnect.me.localeconnect.LocaleConnectBaseActivity;
 import localeconnect.me.localeconnect.Preference;
@@ -33,11 +28,10 @@ import localeconnect.me.localeconnect.event.CreateEventActivity;
 import localeconnect.me.localeconnect.event.EventListActivity;
 import localeconnect.me.localeconnect.service.Service;
 
-public class PreferenceActivity extends LocaleConnectBaseActivity {
+public class IDScanActivity extends LocaleConnectBaseActivity {
 
     private ArrayAdapter listAdapter;
     AsyncTask<Void, Void, List<Preference>> execute;
-    List<Preference> stubPrefList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +41,6 @@ public class PreferenceActivity extends LocaleConnectBaseActivity {
         populateListView();
 
         registerOnClick();
-
-        Button mAddPrefButton = (Button) findViewById(R.id.add_my_preference_button);
-        mAddPrefButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addPreference();
-            }
-        });
-
     }
 
     private void registerOnClick(){
@@ -67,7 +52,7 @@ public class PreferenceActivity extends LocaleConnectBaseActivity {
                 TextView textView = (TextView) view;
                 String message = "You clicked "+ position + " clicked "+
                         textView.getText().toString();
-                Toast.makeText(PreferenceActivity.this, message, Toast.LENGTH_LONG).show();
+                Toast.makeText(IDScanActivity.this, message, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -128,14 +113,10 @@ public class PreferenceActivity extends LocaleConnectBaseActivity {
                     User user = appContext.getUser();
 
                     if (mPreference == null)
-                        //p = mSservice.getPreferences(user.getId());
-                        p = PreferenceActivity.this.stubPrefList;
+                        p = mSservice.getPreferences(null);
                     else {
                         mPreference.setUserId(user.getId());
-                        //p = mSservice.createPreference(mPreference);
-                        PreferenceActivity.this.stubPrefList.add(mPreference);
-                        p = PreferenceActivity.this.stubPrefList;
-
+                        p = mSservice.createPreference(mPreference);
                     }
 
 
@@ -197,6 +178,7 @@ public class PreferenceActivity extends LocaleConnectBaseActivity {
                 pListTask.execute();
 
     }
+
 
 
 }

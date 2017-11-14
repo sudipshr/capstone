@@ -18,6 +18,11 @@
         android:title="@string/menu_preference"
         app:showAsAction="never" />
     <item
+        android:id="@+id/idScanMenuItem"
+        android:orderInCategory="100"
+        android:title="@string/menu_id_scan"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/logoutMenuItem"
         android:orderInCategory="100"
         android:title="@string/menu_logout"
