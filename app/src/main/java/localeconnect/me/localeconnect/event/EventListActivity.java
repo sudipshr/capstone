@@ -110,7 +110,7 @@ public class EventListActivity extends LocaleConnectBaseActivity {
                     LocaleApp appContext = (LocaleApp) getApplicationContext();
                     User user = appContext.getUser();
                     Log.i("ERRORRRR",user != null ? user.toString():"USER CANT B RETRIEVED");
-                    evt = mSservice.getEvents();
+                    evt = mSservice.getEvents(user.getId());
 
 
                     Log.i("return msg:", evt != null?evt.toString():"no events");

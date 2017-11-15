@@ -128,13 +128,13 @@ public class PreferenceActivity extends LocaleConnectBaseActivity {
                     User user = appContext.getUser();
 
                     if (mPreference == null)
-                        //p = mSservice.getPreferences(user.getId());
-                        p = PreferenceActivity.this.stubPrefList;
+                        p = mSservice.getPreferences(user.getId());
+                        //p = PreferenceActivity.this.stubPrefList;
                     else {
                         mPreference.setUserId(user.getId());
-                        //p = mSservice.createPreference(mPreference);
-                        PreferenceActivity.this.stubPrefList.add(mPreference);
-                        p = PreferenceActivity.this.stubPrefList;
+                        p = mSservice.createPreference(mPreference);
+                        //PreferenceActivity.this.stubPrefList.add(mPreference);
+                        //p = PreferenceActivity.this.stubPrefList;
 
                     }
 
@@ -168,7 +168,7 @@ public class PreferenceActivity extends LocaleConnectBaseActivity {
                 //listAdapter.addAll(events);
 
                 for (Preference evt: p){
-                    listAdapter.add(evt);
+                    listAdapter.add(evt.getType());
 
                 }
 

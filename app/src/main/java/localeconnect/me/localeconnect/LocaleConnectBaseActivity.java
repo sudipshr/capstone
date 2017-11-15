@@ -53,6 +53,10 @@ public abstract class LocaleConnectBaseActivity extends AppCompatActivity {
             addId = R.id.ad_view;
 
         }
+        else {
+            addId = R.id.ad_view;
+
+        }
 
         addId = R.id.ad_view_createEvent;
 
@@ -103,6 +107,15 @@ public abstract class LocaleConnectBaseActivity extends AppCompatActivity {
                 return true;
             case R.id.idScanMenuItem:
                 intent = new Intent(this, IDScanActivity.class);
+
+                intent.putExtra("test", "Home Screen.....Under Construction");
+                startActivity(intent);
+                return true;
+            case R.id.logoutMenuItem:
+
+                LocaleApp app = (LocaleApp)getApplicationContext();
+                app.setUser(null);
+                intent = new Intent(this, LoginActivity.class);
 
                 intent.putExtra("test", "Home Screen.....Under Construction");
                 startActivity(intent);

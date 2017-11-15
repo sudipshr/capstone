@@ -139,7 +139,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEventListButton = (Button) findViewById(R.id.eventList_button);
+/*        Button mEventListButton = (Button) findViewById(R.id.eventList_button);
         mEventListButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,7 +153,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onClick(View view) {
                 navigateToCreateEvent(view);
             }
-        });
+        });*/
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -458,7 +458,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
+            LocaleApp appContext = (LocaleApp) getApplicationContext();
+            ;
+
+            if (success && appContext.getUser()!= null) {
                 finish();
 
 

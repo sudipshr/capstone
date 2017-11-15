@@ -89,9 +89,9 @@ public class Service {
 
     }
 
-    public List<Event> getEvents() {
+    public List<Event> getEvents(String userId) {
 
-        ResponseEntity<Event[]> responseEntity = ServiceUtil.getRestTemplate().getForEntity(EVENTSERV_URI+ "/events?userId=hangout", Event[].class);
+        ResponseEntity<Event[]> responseEntity = ServiceUtil.getRestTemplate().getForEntity(EVENTSERV_URI+ "/matchingEvents?userId="+userId, Event[].class);
         Event[] objects = responseEntity.getBody();
 
         return Arrays.asList(objects);
@@ -107,7 +107,7 @@ public class Service {
 
     public List<Preference> getPreferences(String userId) {
 
-        ResponseEntity<Preference[]> responseEntity = ServiceUtil.getRestTemplate().getForEntity(USERSERV_URI+ "/preferences?userId="+userId, Preference[].class);
+        ResponseEntity<Preference[]> responseEntity = ServiceUtil.getRestTemplate().getForEntity(USERSERV_URI+ "/getPreferences?userId="+userId, Preference[].class);
         Preference[] objects = responseEntity.getBody();
 
         return Arrays.asList(objects);
@@ -117,11 +117,12 @@ public class Service {
     public List<Preference> createPreference(Preference preference) {
 
         HttpEntity<Preference> request = new HttpEntity<Preference>(preference);
-        ResponseEntity<Preference[]> responseEntity = ServiceUtil.getRestTemplate().exchange(USERSERV_URI+"/createPreference",
+        ResponseEntity<Preference> responseEntity = ServiceUtil.getRestTemplate().exchange(USERSERV_URI+"/createPreference",
                 HttpMethod.POST,
-                request, Preference[].class);
-        Preference[] objects = responseEntity.getBody();
+                request, Preference.class);
+        Preference objects = responseEntity.getBody();
 
-        return Arrays.asList(objects);
+        return getPreferences(objects.getUserId());
+
     }
 }

@@ -1,12 +1,12 @@
 package localeconnect.me.localeconnect;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by admin on 11/13/2017.
  */
 
 public class Preference {
-
-    private String id;
 
     public String getUserId() {
         return userId;
@@ -16,7 +16,20 @@ public class Preference {
         this.userId = userId;
     }
 
+    private String id;
     private String userId;
+    private String type;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @JsonProperty
+    private String description;
 
     public String getType() {
         return type;
@@ -26,8 +39,13 @@ public class Preference {
         this.type = type;
     }
 
-    private String type;
-    private String description;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -36,25 +54,29 @@ public class Preference {
 
         Preference that = (Preference) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
-        return description != null ? description.equals(that.description) : that.description == null;
+        if (!id.equals(that.id)) return false;
+        if (!userId.equals(that.userId)) return false;
+        if (!type.equals(that.type)) return false;
+        return description.equals(that.description);
 
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
+        int result = id.hashCode();
+        result = 31 * result + userId.hashCode();
+        result = 31 * result + type.hashCode();
+        result = 31 * result + description.hashCode();
         return result;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "Preference{" +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
