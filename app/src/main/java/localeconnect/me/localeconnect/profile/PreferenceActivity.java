@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -171,6 +172,9 @@ public class PreferenceActivity extends LocaleConnectBaseActivity {
                     listAdapter.add(evt.getType());
 
                 }
+
+                EditText pTextView = (EditText) findViewById(R.id.lc_myPreferenceTextView);
+                pTextView.setText(null);
 
                 //Toast.makeText(EventListActivity.this, "Create Event Results: "+events.toString(), Toast.LENGTH_SHORT).show();
 

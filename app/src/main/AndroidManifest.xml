@@ -78,6 +78,16 @@
                 android:value="localeconnect.me.localeconnect.LoginActivity" />
         </activity>
 
+        <activity
+            android:name=".profile.OcrCaptureActivity"
+            android:label="@string/title_activity_preference"
+            android:parentActivityName=".profile.OcrCaptureActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="localeconnect.me.localeconnect.profile.IDScanActivity" />
+        </activity>
+
     </application>
 
 </manifest>

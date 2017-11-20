@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -195,7 +196,7 @@ public class CreateEventActivity extends LocaleConnectBaseActivity implements Lo
 
             }
 
-            TextView pTextView = (TextView) findViewById(R.id.lc_preferenceTextView);
+            EditText pTextView = (EditText) findViewById(R.id.lc_preferenceTextView);
             pTextView.setText(null);
 
         }

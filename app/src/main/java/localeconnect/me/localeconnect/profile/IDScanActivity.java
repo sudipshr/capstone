@@ -11,9 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.api.CommonStatusCodes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,157 +31,95 @@ import localeconnect.me.localeconnect.event.CreateEventActivity;
 import localeconnect.me.localeconnect.event.EventListActivity;
 import localeconnect.me.localeconnect.service.Service;
 
-public class IDScanActivity extends LocaleConnectBaseActivity {
+public class IDScanActivity extends LocaleConnectBaseActivity implements View.OnClickListener{
 
     private ArrayAdapter listAdapter;
     AsyncTask<Void, Void, List<Preference>> execute;
 
+    // Use a compound button so either checkbox or switch widgets work.
+    private CompoundButton autoFocus;
+    private CompoundButton useFlash;
+    private TextView statusMessage;
+    private TextView textValue;
+
+    private static final int RC_OCR_CAPTURE = 9003;
+    private static final String TAG = "IDScanActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preference);
+        setContentView(R.layout.activity_id_scan);
 
-        populateListView();
+        statusMessage = (TextView)findViewById(R.id.status_message);
+        textValue = (TextView)findViewById(R.id.text_value);
 
-        registerOnClick();
+        //autoFocus = (CompoundButton) findViewById(R.id.auto_focus);
+        //useFlash = (CompoundButton) findViewById(R.id.use_flash);
+
+        findViewById(R.id.read_id_button).setOnClickListener(this);
     }
 
-    private void registerOnClick(){
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        //TODO
+        if (v.getId() == R.id.read_id_button) {
+            // launch Ocr capture activity.
+            Intent intent = new Intent(this, OcrCaptureActivity.class);
+            intent.putExtra(OcrCaptureActivity.AutoFocus, true);
+            intent.putExtra(OcrCaptureActivity.UseFlash, true);
 
-        ListView list = (ListView) findViewById(R.id.myPreferenceListView);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = (TextView) view;
-                String message = "You clicked "+ position + " clicked "+
-                        textView.getText().toString();
-                Toast.makeText(IDScanActivity.this, message, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void populateListView(){
-
-
-
-        ListView listView = (ListView) findViewById(R.id.myPreferenceListView);
-
-
-        // Create and populate a List of planet names.
-        String[] planets = new String[] { "Event1", "Event2", "Event3", "Event4",
-                "Event5", "Event6", "Event7", "Event8"};
-        ArrayList<String> planetList = new ArrayList<String>();
-        planetList.addAll( Arrays.asList(planets) );
-
-        // Create ArrayAdapter using the planet list.
-        listAdapter = new ArrayAdapter<String>(this, R.layout.activity_my_preference_list_row, planetList);
-
-
-
-        // Set the ArrayAdapter as the ListView's adapter.
-        listView.setAdapter( listAdapter );
-
-
-        PreferenceListTask pListTask = new PreferenceListTask(null, new Service(), false);
-        execute =
-                pListTask.execute();
-
-
-
-
-
-    }
-
-    private class PreferenceListTask extends AsyncTask<Void, Void, List<Preference>> {
-
-        private final Preference mPreference;
-        private boolean mStubMode;
-        private Service mSservice;
-
-
-        PreferenceListTask(Preference preference, Service service, boolean stubMode) {
-            mPreference = preference;
-            mStubMode = stubMode;
-            mSservice = service;
+            startActivityForResult(intent, RC_OCR_CAPTURE);
         }
+    }
 
-        @Override
-        protected List<Preference> doInBackground(Void... params) {
-
-            List<Preference> p = null;
-            if (!mStubMode){
-                try {
-
-                    LocaleApp appContext = (LocaleApp) getApplicationContext();
-                    User user = appContext.getUser();
-
-                    if (mPreference == null)
-                        p = mSservice.getPreferences(null);
-                    else {
-                        mPreference.setUserId(user.getId());
-                        p = mSservice.createPreference(mPreference);
-                    }
-
-
-                   Log.i("return msg:", p != null?p.toString():"no preferences");
-                } catch (Exception e) {
-                    Log.e("PreferenceListActivity", e.getMessage(), e);
+    /**
+     * Called when an activity you launched exits, giving you the requestCode
+     * you started it with, the resultCode it returned, and any additional
+     * data from it.  The <var>resultCode</var> will be
+     * {@link #RESULT_CANCELED} if the activity explicitly returned that,
+     * didn't return any result, or crashed during its operation.
+     * <p/>
+     * <p>You will receive this call immediately before onResume() when your
+     * activity is re-starting.
+     * <p/>
+     *
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode  The integer result code returned by the child activity
+     *                    through its setResult().
+     * @param data        An Intent, which can return result data to the caller
+     *                    (various data can be attached to Intent "extras").
+     * @see #startActivityForResult
+     * @see #createPendingResult
+     * @see #setResult(int)
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == RC_OCR_CAPTURE) {
+            if (resultCode == CommonStatusCodes.SUCCESS) {
+                if (data != null) {
+                    String text = data.getStringExtra(OcrCaptureActivity.TextBlockObject);
+                    statusMessage.setText(R.string.ocr_success);
+                    textValue.setText(text);
+                    Log.d(TAG, "Text read: " + text);
+                } else {
+                    statusMessage.setText(R.string.ocr_error);
+                    Log.d(TAG, "No Text captured, intent data is null");
                 }
-            }
-            else {
-
-                Preference dummyPref = new Preference();
-                p = new ArrayList<>();
-                p.add(dummyPref);
-                p.add(dummyPref);
-                p.add(dummyPref);
-
-
-            }
-            return p;
-        }
-
-        @Override
-        protected void onPostExecute(final List<Preference> p) {
-
-            listAdapter.clear();
-
-
-            if (p != null) {
-
-                //listAdapter.addAll(events);
-
-                for (Preference evt: p){
-                    listAdapter.add(evt);
-
-                }
-
-                //Toast.makeText(EventListActivity.this, "Create Event Results: "+events.toString(), Toast.LENGTH_SHORT).show();
+            } else {
+                statusMessage.setText(String.format(getString(R.string.ocr_error))+CommonStatusCodes.getStatusCodeString(resultCode));
 
             }
         }
-
-        @Override
-        protected void onCancelled() {
-
+        else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-    private void addPreference(){
-        String s = "some new preference  "+ System.currentTimeMillis();
-
-        Preference p = new Preference();
-        TextView pTextView = (TextView) findViewById(R.id.lc_myPreferenceTextView);
-
-        String intent = pTextView.getText().toString();
-        p.setType(intent);
-
-        PreferenceListTask pListTask = new PreferenceListTask(p, new Service(), false);
-        execute =
-                pListTask.execute();
-
-    }
-
-
 
 }
