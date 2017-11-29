@@ -37,22 +37,7 @@
             />
 
     </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-
-
-        <AutoCompleteTextView
-            android:id="@+id/text_value"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/prompt_eventHint"
-            android:inputType="text"
-            android:maxLines="1"
-
-            />
-    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/read_id_button"
@@ -60,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/lc_post_event"
+        android:text="@string/lc_scan_id"
         android:textStyle="bold" />
 
     <CheckBox

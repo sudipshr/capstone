@@ -72,7 +72,7 @@
         </activity>
         <activity
             android:name=".profile.IDScanActivity"
-            android:label="@string/title_activity_preference"
+            android:label="@string/title_id_scanner"
             android:parentActivityName=".LoginActivity"
             android:theme="@style/AppTheme">
             <meta-data

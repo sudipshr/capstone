@@ -31,6 +31,7 @@
     <string name="title_activity_list_event">Locale Connect: Event List</string>
     <string name="lc_event_preference">Connect Preference</string>
     <string name="lc_post_event">Post Connect Preference</string>
+    <string name="lc_scan_id">Scan ID</string>
     <string name="lc_add_preference">Add Preference</string>
     <string name="lc_event_preference_desc">Optional message</string>
     <string name="lc_eventList_button">Event List</string>

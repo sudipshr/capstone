@@ -57,14 +57,7 @@
         android:layout_height="wrap_content"
         android:text="@string/lc_upload_video_button"
         android:textStyle="bold" />
-    <Button
-        android:id="@+id/add_my_preference_button2"
-        style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/lc_add_preference"
-        android:textStyle="bold" />
+
     <ImageView
         android:id="@+id/imageProfileView"
         android:layout_width="wrap_content"

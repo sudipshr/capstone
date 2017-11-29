@@ -51,7 +51,7 @@ public class IDScanActivity extends LocaleConnectBaseActivity implements View.On
         setContentView(R.layout.activity_id_scan);
 
         statusMessage = (TextView)findViewById(R.id.status_message);
-        textValue = (TextView)findViewById(R.id.text_value);
+        //textValue = (TextView)findViewById(R.id.text_value);
 
         //autoFocus = (CompoundButton) findViewById(R.id.auto_focus);
         //useFlash = (CompoundButton) findViewById(R.id.use_flash);
@@ -106,7 +106,7 @@ public class IDScanActivity extends LocaleConnectBaseActivity implements View.On
                 if (data != null) {
                     String text = data.getStringExtra(OcrCaptureActivity.TextBlockObject);
                     statusMessage.setText(R.string.ocr_success);
-                    textValue.setText(text);
+                    //textValue.setText(text);
                     Log.d(TAG, "Text read: " + text);
                 } else {
                     statusMessage.setText(R.string.ocr_error);

@@ -122,7 +122,7 @@ public class PreferenceActivity extends LocaleConnectBaseActivity {
         );
 
 
-        AWSMobileClient.getInstance().initialize(this).execute();
+        //AWSMobileClient.getInstance().initialize(this).execute();
 
 
     }
@@ -200,6 +200,10 @@ public class PreferenceActivity extends LocaleConnectBaseActivity {
                         PreferenceActivity.this.stubPrefList.add(mPreference);
 
 
+                    }
+
+                    if (p != null){
+                        PreferenceActivity.this.listAdapter.addAll(p.toArray());
                     }
 
 
