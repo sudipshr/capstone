@@ -21,6 +21,8 @@
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-2018232626764954/1047968035" />
 
+
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -45,6 +47,35 @@
         android:layout_marginTop="16dp"
         android:text="@string/lc_add_preference"
         android:textStyle="bold" />
+
+
+
+    <Button
+        android:id="@+id/lc_uploadVideoBtn"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lc_upload_video_button"
+        android:textStyle="bold" />
+    <Button
+        android:id="@+id/add_my_preference_button2"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/lc_add_preference"
+        android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/imageProfileView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
+
+    <VideoView
+        android:id="@+id/videoProfileView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
     <ListView
         android:id="@+id/myPreferenceListView"
         android:layout_width="match_parent"

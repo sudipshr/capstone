@@ -34,6 +34,7 @@
     <string name="lc_add_preference">Add Preference</string>
     <string name="lc_event_preference_desc">Optional message</string>
     <string name="lc_eventList_button">Event List</string>
+    <string name="lc_upload_video_button">Upload Video</string>
     <string name="lc_createEvent_button">Create Event</string>
     <string name="title_activity_swipe_view">SwipeViewActivity</string>
     <string name="title_activity_preference">Locale Connect: My Preference</string>
@@ -43,4 +44,5 @@
     <string name="menu_preference">Preference</string>
     <string name="menu_id_scan">ID Scan</string>
     <string name="menu_logout">Logout</string>
+    <string name="lc_error">Error</string>
 </resources>

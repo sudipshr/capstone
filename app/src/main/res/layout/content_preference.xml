@@ -8,6 +8,8 @@
     tools:context="localeconnect.me.localeconnect.profile.PreferenceActivity"
     tools:showIn="@layout/activity_preference">
 
+
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -24,6 +26,7 @@
             />
 
     </android.support.design.widget.TextInputLayout>
+
     <Button
         android:id="@+id/add_my_preference_button"
         style="?android:textAppearanceSmall"
@@ -32,6 +35,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/lc_add_preference"
         android:textStyle="bold" />
+
     <ListView
         android:id="@+id/myPreferenceListView"
         android:layout_width="match_parent"
