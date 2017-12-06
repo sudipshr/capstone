@@ -2,6 +2,9 @@
     <string name="app_name">Locale Connect</string>
 
     <!-- Strings related to login -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="interested">Interested to meet?</string>
     <string name="prompt_userName">User Name</string>
     <string name="prompt_email">Email (Required for Registration)</string>
     <string name="prompt_eventPreference">Looking to</string>

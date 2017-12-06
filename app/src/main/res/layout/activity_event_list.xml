@@ -18,7 +18,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-2018232626764954/1047968035" />
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
     <ListView
         android:id="@+id/eventListView"

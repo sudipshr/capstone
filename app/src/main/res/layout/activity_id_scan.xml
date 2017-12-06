@@ -13,7 +13,7 @@
 
 
     <com.google.android.gms.ads.AdView
-        android:id="@+id/ad_view_createEvent"
+        android:id="@+id/ad_view_id_scan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
