@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="localeconnect.me.localeconnect.event.CreateEventActivity">
+    tools:context="me.localeconnect.event.CreateEventActivity">
 
 
     <com.google.android.gms.ads.AdView
@@ -19,7 +19,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-2018232626764954/1047968035" />
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
 
     <android.support.design.widget.TextInputLayout

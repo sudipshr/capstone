@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="localeconnect.me.localeconnect.LoginActivity">
+    tools:context="me.localeconnect.LoginActivity">
 
 
     <com.google.android.gms.ads.AdView
@@ -67,12 +67,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_userName"
-                    android:imeActionId="@+id/login"
+                    android:imeActionId="7"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    tools:ignore="InvalidImeActionId" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -85,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
-                    android:imeActionId="@+id/login"
+                    android:imeActionId="7"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
@@ -102,6 +103,15 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in_short"
                 android:textStyle="bold" />
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/google_sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="visible"
+                tools:visibility="gone" />
+
             <Button
                 android:id="@+id/register_button"
                 style="?android:textAppearanceSmall"
@@ -129,6 +139,8 @@
                 android:text="@string/lc_createEvent_button"
                 android:textStyle="bold" />
 -->
+
+
             <CheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"

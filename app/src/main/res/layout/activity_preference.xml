@@ -1,3 +1,5 @@
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +11,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="localeconnect.me.localeconnect.profile.PreferenceActivity"
+    tools:context="me.localeconnect.profile.PreferenceActivity"
     tools:showIn="@layout/activity_preference">
 
     <com.google.android.gms.ads.AdView
@@ -19,9 +21,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-2018232626764954/1047968035" />
-
-
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -47,8 +47,18 @@
         android:layout_marginTop="16dp"
         android:text="@string/lc_add_preference"
         android:textStyle="bold" />
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:fillViewport="false">
+    <ListView
+        android:id="@+id/myPreferenceListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
 
-
+</ScrollView>
 
     <Button
         android:id="@+id/lc_uploadVideoBtn"
@@ -69,9 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible" />
-    <ListView
-        android:id="@+id/myPreferenceListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+
 
 </LinearLayout>
+

@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="localeconnect.me.localeconnect.event.EventListActivity">
+    tools:context="me.localeconnect.event.EventListActivity">
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/ad_view_event_list"
